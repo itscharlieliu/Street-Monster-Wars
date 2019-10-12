@@ -40,7 +40,8 @@ public class GameManager : MonoBehaviour
                 temp = Instantiate(spawnMonster, new Vector3(7, 0, 0), Quaternion.identity);
             }
             temp.GetComponent<SpriteRenderer>().color = Color.yellow;
-            temp.GetComponent<badMonsterController>().movingRight = movingRight;
+            temp.GetComponent<MonsterController>().movingRight = movingRight;
+            temp.gameObject.tag = movingRight ? "MonsterP1" : "MonsterP2";
         }
     }
     private void spawnTrashMonster(bool movingRight)
@@ -58,7 +59,8 @@ public class GameManager : MonoBehaviour
                 temp = Instantiate(spawnMonster, new Vector3(7, 0, 0), Quaternion.identity);
             }
             temp.GetComponent<SpriteRenderer>().color = Color.green;
-            temp.GetComponent<badMonsterController>().movingRight = movingRight;
+            temp.GetComponent<MonsterController>().movingRight = movingRight;
+            temp.gameObject.tag = movingRight ? "MonsterP1" : "MonsterP2";
         }
     }
     public void spawnMonsterSelectorP1(int select)

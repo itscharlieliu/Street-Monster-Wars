@@ -4,99 +4,127 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    //U1 Components
+    private GameObject p1Highlight, p2Highlight;
+    private int p1Highlighted, p2Highlighted;
+
+    //Economy Stuff
     public int playerOneCurrency = 0;
-    public int cookieCost;
-    public GameObject spawnMonster;
+    public int playerTwoCurrency = 0;
+    public int birdCost,oscarCost,draculaCost,bertCost;
+
     private float timeToPay = 1;
     private float timer;
+
+
+
+    //Prefabs
+    public GameObject spawnMonster;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        p1Highlight = GameObject.Find("P1 Highlight");
+        p2Highlight = GameObject.Find("P2 Highlight");
     }
 
     // Update is called once per frame
     void Update()
     {
+        selector();
         timer += Time.deltaTime;
         if (timer >= timeToPay)
         {
             timer = 0;
             playerOneCurrency += 20;
+            playerTwoCurrency += 20;
+        }
+        if(Input.GetKeyDown(KeyCode.W))
+        {
+            spawnMonsterP1(p1Highlighted);
+        }
+        if(Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            spawnMonsterP2(p2Highlighted);
         }
     }
-    private void spawnBirdMonster(bool movingRight)
+    private void spawnMonsterP1(int selected)
     {
-        GameObject temp;
-        if (playerOneCurrency >= cookieCost)
+        switch(selected)
         {
-            playerOneCurrency -= cookieCost;
-            if (movingRight)
-            {
-                temp = Instantiate(spawnMonster, new Vector3(-7, 0, 0), Quaternion.identity);
-            }
-            else
-            {
-                temp = Instantiate(spawnMonster, new Vector3(7, 0, 0), Quaternion.identity);
-            }
-            temp.GetComponent<SpriteRenderer>().color = Color.yellow;
-            temp.GetComponent<MonsterController>().movingRight = movingRight;
-            temp.gameObject.tag = movingRight ? "MonsterP1" : "MonsterP2";
-        }
-    }
-    private void spawnTrashMonster(bool movingRight)
-    {
-        GameObject temp;
-        if (playerOneCurrency >= cookieCost)
-        {
-            playerOneCurrency -= cookieCost;
-            if(movingRight)
-            {
-                temp = Instantiate(spawnMonster, new Vector3(-7, 0, 0), Quaternion.identity);
-            }
-            else
-            {
-                temp = Instantiate(spawnMonster, new Vector3(7, 0, 0), Quaternion.identity);
-            }
-            temp.GetComponent<SpriteRenderer>().color = Color.green;
-            temp.GetComponent<MonsterController>().movingRight = movingRight;
-            temp.gameObject.tag = movingRight ? "MonsterP1" : "MonsterP2";
-        }
-    }
-    public void spawnMonsterSelectorP1(int select)
-    {
-        switch(select)
-        {
-            case 0: //oscar trash
-                spawnTrashMonster(true);
+            case 0:
+                if(playerOneCurrency > birdCost)
+                {
+                    GameObject temp = Instantiate(spawnMonster, new Vector3(0, 0, 0), Quaternion.identity);
+                    temp.GetComponent<SpriteRenderer>().color = new Color(0.8627f, 0.8705f, 0.2156f,1f);
+                    temp.GetComponent<MonsterController>().movingRight = true;
+                }
                 break;
-            case 1: //big bird
-                spawnBirdMonster(true);
-                break;
-            case 2: //count dracula
-                break;
-            case 3: //bert
-                break;
-            default:
+            case 1:
+                if (playerOneCurrency > oscarCost)
+                {
+                    GameObject temp = Instantiate(spawnMonster, new Vector3(0, 0, 0), Quaternion.identity);
+                    temp.GetComponent<SpriteRenderer>().color = new Color(0.1647f, 0.4862f, 0.2431f, 1f);
+                    temp.GetComponent<MonsterController>().movingRight = true;
+                }
                 break;
         }
     }
-    public void spawnMonsterSelectorP2(int select)
+    private void spawnMonsterP2(int selected)
     {
-        switch (select)
+        switch (selected)
         {
-            case 0: //oscar trash
-                spawnTrashMonster(false);
+            case 0:
+                if (playerTwoCurrency > birdCost)
+                {
+                    GameObject temp = Instantiate(spawnMonster, new Vector3(0, 0, 0), Quaternion.identity);
+                    temp.GetComponent<SpriteRenderer>().color = new Color(0.8627f, 0.8705f, 0.2156f, 1f);
+                    temp.GetComponent<MonsterController>().movingRight = false;
+                }
                 break;
-            case 1: //big bird
-                spawnBirdMonster(false);
+            case 1:
+                if (playerTwoCurrency > oscarCost)
+                {
+                    GameObject temp = Instantiate(spawnMonster, new Vector3(0, 0, 0), Quaternion.identity);
+                    temp.GetComponent<SpriteRenderer>().color = new Color(0.1647f, 0.4862f, 0.2431f, 1f);
+                    temp.GetComponent<MonsterController>().movingRight = false;
+                }
                 break;
-            case 2: //count dracula
-                break;
-            case 3: //bert
-                break;
-            default:
-                break;
+        }
+    }
+    private void selector()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            if (p1Highlighted != 0)
+            {
+                p1Highlight.GetComponent<RectTransform>().anchoredPosition = new Vector2(p1Highlight.GetComponent<RectTransform>().anchoredPosition.x - 75, 298f);
+                p1Highlighted--;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            if (p1Highlighted != 3)
+            {
+                p1Highlight.GetComponent<RectTransform>().anchoredPosition = new Vector2(p1Highlight.GetComponent<RectTransform>().anchoredPosition.x + 75, 298f);
+                p1Highlighted++;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            if (p2Highlighted != 0)
+            {
+                p2Highlight.GetComponent<RectTransform>().anchoredPosition = new Vector2(p2Highlight.GetComponent<RectTransform>().anchoredPosition.x - 75, -2.4f);
+                p2Highlighted--;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if (p2Highlighted != 3)
+            {
+                p2Highlight.GetComponent<RectTransform>().anchoredPosition = new Vector2(p2Highlight.GetComponent<RectTransform>().anchoredPosition.x + 75, -2.4f);
+                p2Highlighted++;
+            }
         }
     }
 }

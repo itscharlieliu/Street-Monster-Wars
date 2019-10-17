@@ -6,7 +6,8 @@ public class MonsterController : MonoBehaviour
 {
     public bool movingRight;
     public float speed;
-    public float health = 10f;
+    public float health;
+    public float maxHealth = 10f;
     public float attack = 1f;
     public float attackDelay = 1f;
 
@@ -14,6 +15,7 @@ public class MonsterController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        health = maxHealth;
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         if (movingRight)
         {

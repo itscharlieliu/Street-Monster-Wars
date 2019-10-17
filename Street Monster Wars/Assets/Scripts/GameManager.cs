@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     //U1 Components
-    private GameObject p1Highlight, p2Highlight;
+    private GameObject p1Highlight, p2Highlight,p1Coins,p2Coins;
     private int p1Highlighted, p2Highlighted;
 
     //Economy Stuff
@@ -26,6 +27,8 @@ public class GameManager : MonoBehaviour
     {
         p1Highlight = GameObject.Find("P1 Highlight");
         p2Highlight = GameObject.Find("P2 Highlight");
+        p1Coins = GameObject.Find("P1 Coins");
+        p2Coins = GameObject.Find("P2 Coins");
     }
 
     // Update is called once per frame
@@ -36,10 +39,12 @@ public class GameManager : MonoBehaviour
         if (timer >= timeToPay)
         {
             timer = 0;
-            playerOneCurrency += 20;
-            playerTwoCurrency += 20;
+            playerOneCurrency += 1;
+            playerTwoCurrency += 1;
         }
-        if(Input.GetKeyDown(KeyCode.W))
+        p1Coins.GetComponent<Text>().text = "Coins: " + playerOneCurrency;
+        p2Coins.GetComponent<Text>().text = "Coins: " + playerTwoCurrency;
+        if (Input.GetKeyDown(KeyCode.W))
         {
             spawnMonsterP1(p1Highlighted);
         }
@@ -55,7 +60,12 @@ public class GameManager : MonoBehaviour
             case 0:
                 if(playerOneCurrency > birdCost)
                 {
-                    GameObject temp = Instantiate(spawnMonster, new Vector3(0, 0, 0), Quaternion.identity);
+                    playerOneCurrency -= birdCost;
+                    GameObject temp = Instantiate(spawnMonster, new Vector3(-9, 0, 0), Quaternion.identity);
+                    temp.tag = "MonsterP1";
+                    temp.GetComponent<MonsterController>().maxHealth *= 2;
+                    temp.GetComponent<MonsterController>().speed *= 0.5f;
+                    temp.GetComponent<MonsterController>().attack *= 0.75f;
                     temp.GetComponent<SpriteRenderer>().color = new Color(0.8627f, 0.8705f, 0.2156f,1f);
                     temp.GetComponent<MonsterController>().movingRight = true;
                 }
@@ -63,7 +73,9 @@ public class GameManager : MonoBehaviour
             case 1:
                 if (playerOneCurrency > oscarCost)
                 {
-                    GameObject temp = Instantiate(spawnMonster, new Vector3(0, 0, 0), Quaternion.identity);
+                    playerOneCurrency -= oscarCost;
+                    GameObject temp = Instantiate(spawnMonster, new Vector3(-9, 0, 0), Quaternion.identity);
+                    temp.tag = "MonsterP1";
                     temp.GetComponent<SpriteRenderer>().color = new Color(0.1647f, 0.4862f, 0.2431f, 1f);
                     temp.GetComponent<MonsterController>().movingRight = true;
                 }
@@ -77,7 +89,12 @@ public class GameManager : MonoBehaviour
             case 0:
                 if (playerTwoCurrency > birdCost)
                 {
-                    GameObject temp = Instantiate(spawnMonster, new Vector3(0, 0, 0), Quaternion.identity);
+                    playerTwoCurrency -= birdCost;
+                    GameObject temp = Instantiate(spawnMonster, new Vector3(4, 0, 0), Quaternion.identity);
+                    temp.tag = "MonsterP2";
+                    temp.GetComponent<MonsterController>().maxHealth *= 2;
+                    temp.GetComponent<MonsterController>().speed *= 0.5f;
+                    temp.GetComponent<MonsterController>().attack *= 0.75f;
                     temp.GetComponent<SpriteRenderer>().color = new Color(0.8627f, 0.8705f, 0.2156f, 1f);
                     temp.GetComponent<MonsterController>().movingRight = false;
                 }
@@ -85,7 +102,9 @@ public class GameManager : MonoBehaviour
             case 1:
                 if (playerTwoCurrency > oscarCost)
                 {
-                    GameObject temp = Instantiate(spawnMonster, new Vector3(0, 0, 0), Quaternion.identity);
+                    playerTwoCurrency -= oscarCost;
+                    GameObject temp = Instantiate(spawnMonster, new Vector3(4, 0, 0), Quaternion.identity);
+                    temp.tag = "MonsterP2";
                     temp.GetComponent<SpriteRenderer>().color = new Color(0.1647f, 0.4862f, 0.2431f, 1f);
                     temp.GetComponent<MonsterController>().movingRight = false;
                 }

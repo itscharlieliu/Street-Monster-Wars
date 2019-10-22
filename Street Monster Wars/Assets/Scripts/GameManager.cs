@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
-            if (p1Highlighted != 3)
+            if (p1Highlighted != 4)
             {
                 p1Highlight.GetComponent<RectTransform>().anchoredPosition = new Vector2(p1Highlight.GetComponent<RectTransform>().anchoredPosition.x + 75, 298f);
                 p1Highlighted++;
@@ -139,7 +139,7 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (p2Highlighted != 3)
+            if (p2Highlighted != 4)
             {
                 p2Highlight.GetComponent<RectTransform>().anchoredPosition = new Vector2(p2Highlight.GetComponent<RectTransform>().anchoredPosition.x + 75, -2.4f);
                 p2Highlighted++;

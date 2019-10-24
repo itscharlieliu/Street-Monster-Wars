@@ -833,7 +833,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 7
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -988,7 +988,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 7
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1307,10 +1307,12 @@ MonoBehaviour:
   playerTwoCurrency: 0
   birdCost: 7
   oscarCost: 3
-  draculaCost: 0
-  bertCost: 0
-  spawnMonster: {fileID: 1593330484266706862, guid: b03b5031beb0a64419fd548ea26e11e5,
-    type: 3}
+  draculaCost: 1
+  bertCost: 5
+  bigBird: {fileID: 7347033991285502447, guid: 3318401254968e34c95f45797e6f972f, type: 3}
+  dracula: {fileID: 2128513929720232494, guid: c995cf9ac29dc2d408c10b0eff5908ea, type: 3}
+  bert: {fileID: 4432795888789729393, guid: 8735b890a0ec11146890f6b032428338, type: 3}
+  oscar: {fileID: 8710427169753090129, guid: d1b90ae26b8ad254d926b1c2cc0264b8, type: 3}
 --- !u!4 &429950185
 Transform:
   m_ObjectHideFlags: 0
@@ -1602,7 +1604,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 572218708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.18, y: 0, z: 0}
+  m_LocalPosition: {x: -11.18, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7262451}
@@ -2771,36 +2773,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1271164529}
   m_CullTransparentMesh: 0
---- !u!1 &1305748610
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1305748611}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1305748611
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1305748610}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.15, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1321509136
 GameObject:
   m_ObjectHideFlags: 0
@@ -3077,7 +3049,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 7
+  m_text: 5
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3255,7 +3227,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1604375632}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.76, y: 0, z: 0}
+  m_LocalPosition: {x: 5.76, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 145956158}
@@ -3893,7 +3865,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 7
+  m_text: 5
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4000,6 +3972,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 572218710}
     m_Modifications:
+    - target: {fileID: 1151437085428917646, guid: 6a701d0c35aa83e4fb23ec8b990e9308,
+        type: 3}
+      propertyPath: m_Name
+      value: Health Bar
+      objectReference: {fileID: 0}
     - target: {fileID: 1151437085428917647, guid: 6a701d0c35aa83e4fb23ec8b990e9308,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4054,11 +4031,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1151437085428917646, guid: 6a701d0c35aa83e4fb23ec8b990e9308,
-        type: 3}
-      propertyPath: m_Name
-      value: Health Bar
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a701d0c35aa83e4fb23ec8b990e9308, type: 3}

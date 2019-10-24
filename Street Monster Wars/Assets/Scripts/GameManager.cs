@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
 
     //Prefabs
-    public GameObject spawnMonster;
+    public GameObject bigBird,dracula,bert,oscar;
 
     // Start is called before the first frame update
     void Start()
@@ -58,25 +58,38 @@ public class GameManager : MonoBehaviour
         switch(selected)
         {
             case 0:
-                if(playerOneCurrency > birdCost)
+                if(playerOneCurrency >= birdCost)
                 {
                     playerOneCurrency -= birdCost;
-                    GameObject temp = Instantiate(spawnMonster, new Vector3(-9, 0, 0), Quaternion.identity);
+                    GameObject temp = Instantiate(bigBird, new Vector3(-9, -3, 0), Quaternion.identity);
                     temp.tag = "MonsterP1";
-                    temp.GetComponent<MonsterController>().maxHealth *= 2;
-                    temp.GetComponent<MonsterController>().speed *= 0.5f;
-                    temp.GetComponent<MonsterController>().attack *= 0.75f;
-                    temp.GetComponent<SpriteRenderer>().color = new Color(0.8627f, 0.8705f, 0.2156f,1f);
                     temp.GetComponent<MonsterController>().movingRight = true;
                 }
                 break;
             case 1:
-                if (playerOneCurrency > oscarCost)
+                if (playerOneCurrency >= oscarCost)
                 {
                     playerOneCurrency -= oscarCost;
-                    GameObject temp = Instantiate(spawnMonster, new Vector3(-9, 0, 0), Quaternion.identity);
+                    GameObject temp = Instantiate(oscar, new Vector3(-9, -3, 0), Quaternion.identity);
                     temp.tag = "MonsterP1";
-                    temp.GetComponent<SpriteRenderer>().color = new Color(0.1647f, 0.4862f, 0.2431f, 1f);
+                    temp.GetComponent<MonsterController>().movingRight = true;
+                }
+                break;
+            case 2:
+                if(playerOneCurrency >= bertCost)
+                {
+                    playerOneCurrency -= bertCost;
+                    GameObject temp = Instantiate(bert, new Vector3(-9, -3, 0), Quaternion.identity);
+                    temp.tag = "MonsterP1";
+                    temp.GetComponent<MonsterController>().movingRight = true;
+                }
+                break;
+            case 3:
+                if (playerOneCurrency >= draculaCost)
+                {
+                    playerOneCurrency -= bertCost;
+                    GameObject temp = Instantiate(dracula, new Vector3(-9, -3, 0), Quaternion.identity);
+                    temp.tag = "MonsterP1";
                     temp.GetComponent<MonsterController>().movingRight = true;
                 }
                 break;
@@ -87,26 +100,43 @@ public class GameManager : MonoBehaviour
         switch (selected)
         {
             case 0:
-                if (playerTwoCurrency > birdCost)
+                if (playerTwoCurrency >= birdCost)
                 {
                     playerTwoCurrency -= birdCost;
-                    GameObject temp = Instantiate(spawnMonster, new Vector3(4, 0, 0), Quaternion.identity);
+                    GameObject temp = Instantiate(bigBird, new Vector3(4, -3, 0), Quaternion.identity);
                     temp.tag = "MonsterP2";
-                    temp.GetComponent<MonsterController>().maxHealth *= 2;
-                    temp.GetComponent<MonsterController>().speed *= 0.5f;
-                    temp.GetComponent<MonsterController>().attack *= 0.75f;
-                    temp.GetComponent<SpriteRenderer>().color = new Color(0.8627f, 0.8705f, 0.2156f, 1f);
                     temp.GetComponent<MonsterController>().movingRight = false;
+                    temp.GetComponent<SpriteRenderer>().flipX = true;
                 }
                 break;
             case 1:
-                if (playerTwoCurrency > oscarCost)
+                if (playerTwoCurrency >= oscarCost)
                 {
                     playerTwoCurrency -= oscarCost;
-                    GameObject temp = Instantiate(spawnMonster, new Vector3(4, 0, 0), Quaternion.identity);
+                    GameObject temp = Instantiate(oscar, new Vector3(4, -3, 0), Quaternion.identity);
                     temp.tag = "MonsterP2";
-                    temp.GetComponent<SpriteRenderer>().color = new Color(0.1647f, 0.4862f, 0.2431f, 1f);
                     temp.GetComponent<MonsterController>().movingRight = false;
+                    temp.GetComponent<SpriteRenderer>().flipX = true;
+                }
+                break;
+            case 2:
+                if (playerTwoCurrency >= bertCost)
+                {
+                    playerTwoCurrency -= bertCost;
+                    GameObject temp = Instantiate(bert, new Vector3(4, -3, 0), Quaternion.identity);
+                    temp.tag = "MonsterP2";
+                    temp.GetComponent<MonsterController>().movingRight = false;
+                    temp.GetComponent<SpriteRenderer>().flipX = true;
+                }
+                break;
+            case 3:
+                if (playerTwoCurrency >= draculaCost)
+                {
+                    playerTwoCurrency -= bertCost;
+                    GameObject temp = Instantiate(dracula, new Vector3(4, -3, 0), Quaternion.identity);
+                    temp.tag = "MonsterP2";
+                    temp.GetComponent<MonsterController>().movingRight = false;
+                    temp.GetComponent<SpriteRenderer>().flipX = true;
                 }
                 break;
         }

@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     //U1 Components
-    private GameObject p1Highlight, p2Highlight,p1Coins,p2Coins, p1RHighlight,p2RHighlight,p1ResearchTree,p2ResearchTree;
+    private GameObject p1Highlight, p2Highlight,p1Coins,p2Coins, p1RHighlight,p2RHighlight,p1ResearchTree,p2ResearchTree,p1IncomeCost,p2IncomeCost,p1HealthCost,p2HealthCost;
     private int p1Highlighted, p2Highlighted, p1RHighlighted, p2RHighlighted;
     private bool playerOneResearching, playerTwoResearching;
+    private bool p1RecentPress, p2RecentPress;
     //Economy Stuff
     public int playerOneCurrency = 0;
     public int playerTwoCurrency = 0;
+    public int p1IncreaseIncomeCost, p2IncreaseIncomeCost, p1RHealthCost, p2RHealthCost;
     public int playerOneIncome = 1;
     public int playerTwoIncome = 1;
     public int birdCost,oscarCost,draculaCost,bertCost;
@@ -31,12 +34,18 @@ public class GameManager : MonoBehaviour
         p2Highlight = GameObject.Find("P2 Highlight");
         p1RHighlight = GameObject.Find("P1 ResearchHighlight");
         p2RHighlight = GameObject.Find("P2 ResearchHighlight");
+        p1IncomeCost = GameObject.Find("P1IncreaseIncome");
+        p2IncomeCost = GameObject.Find("P2IncreaseIncome");
+        p1HealthCost = GameObject.Find("P1BaseHealth");
+        p2HealthCost = GameObject.Find("P2BaseHealth");
         p1ResearchTree = GameObject.Find("P1 Research");
         p2ResearchTree = GameObject.Find("P2 Research");
         p1Coins = GameObject.Find("P1 Coins");
         p2Coins = GameObject.Find("P2 Coins");
         playerOneResearching = false;
         playerTwoResearching = false;
+        p1RecentPress = false;
+        p2RecentPress = false;
         p1ResearchTree.SetActive(playerOneResearching);
         p2ResearchTree.SetActive(playerTwoResearching);
     }
@@ -54,21 +63,33 @@ public class GameManager : MonoBehaviour
         }
         p1Coins.GetComponent<Text>().text = "Coins: " + playerOneCurrency;
         p2Coins.GetComponent<Text>().text = "Coins: " + playerTwoCurrency;
-        if (Input.GetKeyDown(KeyCode.W) && !playerOneResearching)
+        if (Input.GetKeyDown(KeyCode.W) && playerOneResearching && !p1RecentPress)
         {
-            selectP1(p1Highlighted);
-        }
-        if (Input.GetKeyDown(KeyCode.W) && playerOneResearching)
-        {
+            p1RecentPress = true;
             selectRP1(p1RHighlighted);
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow) && !playerTwoResearching)
+        if(Input.GetKeyDown(KeyCode.W) && !playerOneResearching && !p1RecentPress)
         {
+            p1RecentPress = true;
+            selectP1(p1Highlighted);
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow) && playerTwoResearching && !p2RecentPress)
+        {
+            p2RecentPress = true;
+            selectRP2(p2RHighlighted);
+        }
+        if(Input.GetKeyDown(KeyCode.UpArrow) && !playerTwoResearching && !p2RecentPress)
+        {
+            p2RecentPress = true;
             selectP2(p2Highlighted);
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow) && playerTwoResearching)
+        if(Input.GetKeyUp(KeyCode.W))
         {
-            selectRP2(p2RHighlighted);
+            p1RecentPress = false;
+        }
+        if(Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            p2RecentPress = false;
         }
         p1ResearchTree.SetActive(playerOneResearching);
         p2ResearchTree.SetActive(playerTwoResearching);
@@ -78,10 +99,22 @@ public class GameManager : MonoBehaviour
         switch(selected)
         {
             case 0:
-                Debug.Log("Increase Income");
+                if(playerOneCurrency > p1IncreaseIncomeCost)
+                {
+                    playerOneIncome += 1;
+                    playerOneCurrency -= p1IncreaseIncomeCost;
+                    p1IncreaseIncomeCost += 50;
+                    p1IncomeCost.GetComponent<TextMeshProUGUI>().text = p1IncreaseIncomeCost + "";
+                }
                 break;
             case 1:
-                Debug.Log("Restore Base Health");
+                if(playerOneCurrency > p1RHealthCost)
+                {
+                    playerOneCurrency -= p1RHealthCost;
+                    GameObject.Find("P1 Base").GetComponent<MonsterController>().health += 10;
+                    p1RHealthCost += 60;
+                    p1HealthCost.GetComponent<TextMeshProUGUI>().text = p1RHealthCost + "";
+                }
                 break;
             case 2:
                 p1RHighlighted = 0;
@@ -95,10 +128,22 @@ public class GameManager : MonoBehaviour
         switch (selected)
         {
             case 0:
-                Debug.Log("Increase Income");
+                if (playerTwoCurrency > p2IncreaseIncomeCost)
+                {
+                    playerTwoIncome += 1;
+                    playerTwoCurrency -= p2IncreaseIncomeCost;
+                    p2IncreaseIncomeCost += 50;
+                    p2IncomeCost.GetComponent<TextMeshProUGUI>().text = p2IncreaseIncomeCost + "";
+                }
                 break;
             case 1:
-                Debug.Log("Restore Base Health");
+                if (playerTwoCurrency > p2RHealthCost)
+                {
+                    playerTwoCurrency -= p2RHealthCost;
+                    GameObject.Find("P2 Base").GetComponent<MonsterController>().health += 10;
+                    p2RHealthCost += 60;
+                    p2HealthCost.GetComponent<TextMeshProUGUI>().text = p2RHealthCost + "";
+                }
                 break;
             case 2:
                 p2RHighlighted = 0;
@@ -141,7 +186,7 @@ public class GameManager : MonoBehaviour
             case 3:
                 if (playerOneCurrency >= draculaCost)
                 {
-                    playerOneCurrency -= bertCost;
+                    playerOneCurrency -= draculaCost;
                     GameObject temp = Instantiate(dracula, new Vector3(-9, -3, 0), Quaternion.identity);
                     temp.tag = "MonsterP1";
                     temp.GetComponent<MonsterController>().movingRight = true;
@@ -189,7 +234,7 @@ public class GameManager : MonoBehaviour
             case 3:
                 if (playerTwoCurrency >= draculaCost)
                 {
-                    playerTwoCurrency -= bertCost;
+                    playerTwoCurrency -= draculaCost;
                     GameObject temp = Instantiate(dracula, new Vector3(4, -3, 0), Quaternion.identity);
                     temp.tag = "MonsterP2";
                     temp.GetComponent<MonsterController>().movingRight = false;

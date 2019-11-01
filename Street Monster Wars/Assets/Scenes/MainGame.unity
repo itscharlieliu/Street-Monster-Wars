@@ -1751,7 +1751,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 40
+  m_text: 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1979,7 +1979,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 40
+  m_text: 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2110,16 +2110,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerOneCurrency: 0
   playerTwoCurrency: 0
-  p1IncreaseIncomeCost: 40
-  p2IncreaseIncomeCost: 40
-  p1RHealthCost: 50
-  p2RHealthCost: 50
+  p1IncreaseIncomeCost: 10
+  p2IncreaseIncomeCost: 10
+  p1RHealthCost: 10
+  p2RHealthCost: 10
   playerOneIncome: 1
   playerTwoIncome: 1
-  birdCost: 7
+  birdCost: 15
   oscarCost: 3
   draculaCost: 1
   bertCost: 5
+  p1Base: {fileID: 572218708}
+  p2Base: {fileID: 1604375632}
   bigBird: {fileID: 7347033991285502447, guid: 3318401254968e34c95f45797e6f972f, type: 3}
   dracula: {fileID: 2128513929720232494, guid: c995cf9ac29dc2d408c10b0eff5908ea, type: 3}
   bert: {fileID: 4432795888789729393, guid: 8735b890a0ec11146890f6b032428338, type: 3}
@@ -3980,7 +3982,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 50
+  m_text: 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5045,7 +5047,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 50
+  m_text: 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

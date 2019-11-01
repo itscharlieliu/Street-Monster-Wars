@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,10 @@ public class GameManager : MonoBehaviour
     public int playerOneIncome = 1;
     public int playerTwoIncome = 1;
     public int birdCost,oscarCost,draculaCost,bertCost;
+
+    // bases
+    public GameObject p1Base = null;
+    public GameObject p2Base = null;
 
     private float timeToPay = 1;
     private float timer;
@@ -72,6 +77,16 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!p1Base)
+        {
+            SceneManager.LoadScene("ElmoWinScreen", LoadSceneMode.Single);
+        }
+        else if (!p2Base)
+        {
+            SceneManager.LoadScene("CookieWinScreen", LoadSceneMode.Single);
+        }
+
+
         selector();
         timer += Time.deltaTime;
         if (timer >= timeToPay)
@@ -122,7 +137,7 @@ public class GameManager : MonoBehaviour
                 {
                     playerOneIncome += 1;
                     playerOneCurrency -= p1IncreaseIncomeCost;
-                    p1IncreaseIncomeCost += 50;
+                    p1IncreaseIncomeCost += 5;
                     p1IncomeCost.GetComponent<TextMeshProUGUI>().text = p1IncreaseIncomeCost + "";
                 }
                 break;
@@ -131,7 +146,7 @@ public class GameManager : MonoBehaviour
                 {
                     playerOneCurrency -= p1RHealthCost;
                     GameObject.Find("P1 Base").GetComponent<MonsterController>().health += 10;
-                    p1RHealthCost += 60;
+                    p1RHealthCost += 10;
                     p1HealthCost.GetComponent<TextMeshProUGUI>().text = p1RHealthCost + "";
                 }
                 break;
@@ -151,7 +166,7 @@ public class GameManager : MonoBehaviour
                 {
                     playerTwoIncome += 1;
                     playerTwoCurrency -= p2IncreaseIncomeCost;
-                    p2IncreaseIncomeCost += 50;
+                    p2IncreaseIncomeCost += 5;
                     p2IncomeCost.GetComponent<TextMeshProUGUI>().text = p2IncreaseIncomeCost + "";
                 }
                 break;
@@ -160,7 +175,7 @@ public class GameManager : MonoBehaviour
                 {
                     playerTwoCurrency -= p2RHealthCost;
                     GameObject.Find("P2 Base").GetComponent<MonsterController>().health += 10;
-                    p2RHealthCost += 60;
+                    p2RHealthCost += 10;
                     p2HealthCost.GetComponent<TextMeshProUGUI>().text = p2RHealthCost + "";
                 }
                 break;

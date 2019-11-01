@@ -121,11 +121,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingRight: 0
-  speed: 1
-  health: 5
-  maxHealth: 5
-  attack: 1.5
-  attackDelay: 1
+  speed: 3
+  health: 6
+  maxHealth: 6
+  attack: 3
+  attackDelay: 1.5
 --- !u!95 &7040868467534317458
 Animator:
   serializedVersion: 3
